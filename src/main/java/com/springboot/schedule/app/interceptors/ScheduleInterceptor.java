@@ -4,10 +4,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Calendar;
+import java.util.Objects;
 
 @Component("schedule")
 public class ScheduleInterceptor implements HandlerInterceptor {
@@ -33,6 +35,6 @@ public class ScheduleInterceptor implements HandlerInterceptor {
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         HandlerInterceptor.super.postHandle(request, response, handler, modelAndView);
         String message = (String) request.getAttribute("message");
-        modelAndView.addObject("schedule",message);
+        if (Objects.nonNull(modelAndView) && handler instanceof HandlerMethod) modelAndView.addObject("schedule",message);
     }
 }
