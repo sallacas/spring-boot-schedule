@@ -21,7 +21,7 @@ public class AppController {
         model.addAttribute("title","Customer service is closed");
         model.addAttribute("message","Customer service is closed, please return between "
                 .concat(String.valueOf(open))
-                .concat("and ")
+                .concat(" and ")
                 .concat(String.valueOf(close))
                 .concat(" hours."));
         return "closed";

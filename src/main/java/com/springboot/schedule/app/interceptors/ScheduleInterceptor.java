@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Calendar;
 
-@Component
+@Component("schedule")
 public class ScheduleInterceptor implements HandlerInterceptor {
     @Value("${config.schedule.open}")
     private Integer open;
@@ -22,7 +22,7 @@ public class ScheduleInterceptor implements HandlerInterceptor {
         if (hour >= open && hour < close) {
             StringBuilder message = new StringBuilder("Welcome to customer service,");
             message.append(" we attend between ").append(open).append(" and ").append(close).append(" hours");
-            request.setAttribute("message",message);
+            request.setAttribute("message",message.toString());
             return true;
         }
         response.sendRedirect(request.getContextPath().concat("/closed"));
